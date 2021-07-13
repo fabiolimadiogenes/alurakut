@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: #D9E6F6;
+    background-color: #cfd7ff;
     font-family: sans-serif;
   }
 
@@ -24,6 +24,10 @@ img{
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+h1, h2{
+  color: #ffffff;
 }
 
 ${AlurakutStyles}
