@@ -23,6 +23,31 @@ function ProfileSidebar(props) { //proriedades
   )
 }
 
+function ProfileRelationsBox(props){
+  return (
+    <ProfileRelationsBoxWrapper>
+
+      <h2 className="smallTitle">
+        {props.title} ({props.items.length})
+      </h2>
+
+      <ul>
+          {/* {seguidores.map((itemAtual) => {
+            return (
+              <li key={itemAtual}>
+                <a href={`https://github.com/${itemAtual}.png`} >
+                <img src={itemAtual} />
+                <span>{itemAtual}</span>
+                </a>
+              </li>
+            )
+          })} */}
+        </ul>
+
+    </ProfileRelationsBoxWrapper>
+  )
+}
+
 export default function Home() {
   const [comunidades, setComunidades] = React.useState([{
     id: '1222222222212331324',
@@ -39,6 +64,20 @@ export default function Home() {
     "thalitsms",
     "Vini-Melo01",
   ];
+  
+  const [seguidores, setSeguidores] = React.useState([]);
+  // 0 - pegar os arrays dos dados do github
+  React.useEffect(function(){
+    fetch('https://api.github.com/users/fabiolimadiogenes/followers')
+    .then(function (respostaDoServidor){
+      return respostaDoServidor.json();
+    })
+    .then(function(respostaCompleta){
+      setSeguidores(respostaCompleta)
+    })
+  }, [])
+  
+  // 1- Criar um box que vai ter um map, baseado nos items do array que pegamos do github
 
   //colocar os parenteses apenas para poder usar quebra de linha
   return (
@@ -98,6 +137,8 @@ export default function Home() {
       </div>  
 
       <div className="profileRelationsArea" style={{gridArea: "profileRelationsArea"}}>
+
+        <ProfileRelationsBox title="Seguidores" items={seguidores}/>
 
         <ProfileRelationsBoxWrapper>
 
